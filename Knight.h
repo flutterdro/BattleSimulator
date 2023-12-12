@@ -5,19 +5,15 @@
 #ifndef KNIGHT_H
 #define KNIGHT_H
 #include "Unit.h"
+#include "GameBoard.h"
 
 class Knight : public Unit {
 public:
-    Knight(const std::string& id, int posX, int posY)
-        : Unit(id, 50, posX, posY, 5, 1, 5) {}
+    Knight(const std::string& id, int posX, int posY);
 
-    void move(int x, int y, GameBoard* board) override {
-        // Implement Knight-specific movement logic
-    }
+    void move(int x, int y, GameBoard* board) override;
 
-    void attack(GameBoard* board) override {
-        // Implement Knight-specific attack logic
-    }
+    void attack(GameBoard* board) override;
 
     std::string getType() const override {
         return "knight";

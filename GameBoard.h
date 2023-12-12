@@ -4,28 +4,20 @@
 #include <map>
 #include <vector>
 
-#include "Unit.h"
+
+#ifndef GAMEBOARD_H
+#define GAMEBOARD_H
 
 class GameBoard {
 public:
     int M, N;
     std::vector<std::vector<int>> heights;
-    GameBoard(int m, int n) : M(m), N(n), heights(m, std::vector<int>(n)) {}
+    GameBoard(int m, int n);
 
-    void setHeight(int row, int col, int height) {
-        heights[row][col] = height;
-    }
+    void setHeight(int row, int col, int height);
 
-    void UpdateGame() {
-
-    }
-
-    int getHeight(int x, int y) {
-        if (x >= 0 && x < M && y >= 0 && y < N) {
-            return heights[x][y];
-        }
-        return -1; // Neplatná pozice
-    }
+    int getHeight(int x, int y);
 
 
 };
+#endif

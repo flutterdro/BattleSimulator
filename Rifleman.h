@@ -2,24 +2,20 @@
 // Created by Rostyslav on 12.12.2023.
 //
 
+
 #include <string>
 #include "Unit.h"
 
-
+#ifndef RIFLEMAN_H
+#define RIFLEMAN_H
 class Rifleman : public Unit {
 public:
-    Rifleman(const std::string& id, int posX, int posY)
-        : Unit(id, 10, posX, posY, 2, 2, 3) {}
+    Rifleman(const std::string& id, int posX, int posY);
 
-    void move(int x, int y, GameBoard* board) override {
-        // Implement Knight-specific movement logic
-    }
+    void move(int x, int y, GameBoard* board) override ;
 
-    void attack(GameBoard* board) override {
-        // Implement Knight-specific attack logic
-    }
+    void attack(GameBoard* board) override;
 
-    std::string getType() const override {
-        return "rifleman";
-    }
+    [[nodiscard]] std::string getType() const override;
 };
+#endif

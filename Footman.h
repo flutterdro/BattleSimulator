@@ -3,6 +3,9 @@
 //
 
 
+
+#ifndef FOOTMAN_H
+#define FOOTMAN_H
 #include <string>
 
 #include "BattleSimulator.h"
@@ -13,24 +16,11 @@ public:
     Footman(const std::string& id, int posX, int posY)
         : Unit(id, 20, posX, posY, 1, 1, 1) {}
 
-    void move(int x, int y, GameBoard* board) override {
-        // Implement Knight-specific movement logic
-        bool Failed = false;
+    void move(int x, int y, GameBoard* board) override;
 
-        if(BattleSimulator::isPositionOccupied(x,y)) {
+    void attack(GameBoard* board) override;
 
-        }
-
-
-        if(Failed)
-            isDeadInside = true;
-    }
-
-    void attack(GameBoard* board) override {
-        // Implement Knight-specific attack logic
-    }
-
-    std::string getType() const override {
-        return "footman";
-    }
+    std::string getType() const override;
 };
+
+#endif
