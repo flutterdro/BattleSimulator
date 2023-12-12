@@ -19,6 +19,9 @@ void Footman::move(int x, int y, GameBoard* board) {
         isDeadInside = true;
 }
 
+void Footman::attack(GameBoard* board) {
+}
+
 std::string Footman::getType() const  {
     return "footman";
 }

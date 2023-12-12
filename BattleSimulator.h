@@ -1,7 +1,8 @@
 //
 // Created by Rostyslav on 11.12.2023.
 //
-
+#ifndef  BATTLESIMULATOR_H
+#define BATTLESIMULATOR_H
 #include <iostream>
 #include "GameBoard.h"
 #include "sstream"
@@ -10,8 +11,7 @@
 #include "Rifleman.h"
 #include "Footman.h"
 
-#ifndef BATTLESIMULATOR_H
-#define BATTLESIMULATOR_H
+
 class BattleSimulator {
 public:
     static GameBoard* board;
