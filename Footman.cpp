@@ -31,6 +31,30 @@ void Footman::move(int x, int y, GameBoard* board) {
 }
 
 void Footman::attack(GameBoard* board, const std::string& direction) {
+    int atPosX = posX;
+    int atPosY = posY;
+
+    if(direction == "up")
+        atPosY++;
+    else if(direction == "down")
+        atPosY--;
+    else if(direction == "right")
+        atPosX ++;
+    else if(direction == "left")
+        atPosX--;
+    else
+        return;
+
+    auto unit = BattleSimulator::getUnitAtPosition(posX, posY + 1);
+    if(unit == nullptr) {
+        isDeadInside = true;
+        return;
+    }
+
+    int damageEnemy = damage + board->getHeight(posX, posY) - board->getHeight(unit->posX, unit->posY);
+    damageEnemy = std::min(damageEnemy, 0);
+
+    unit->hp-=damageEnemy;
 }
 
 std::string Footman::getType() const  {
