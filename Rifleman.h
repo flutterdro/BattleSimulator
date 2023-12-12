@@ -14,7 +14,7 @@ public:
 
     void move(int x, int y, GameBoard* board) override ;
 
-    void attack(GameBoard* board) override;
+    void attack(GameBoard* board, const std::string& direction) override;
 
     [[nodiscard]] std::string getType() const override;
 };

@@ -20,7 +20,7 @@ public:
     virtual ~Unit() = default;
 
     virtual void move(int x, int y, GameBoard* board) = 0; // Pure virtual function for movement
-    virtual void attack(GameBoard* board) = 0; // Pure virtual function for attack
+    virtual void attack(GameBoard* board, const std::string& direction) = 0; // Pure virtual function for attack
     virtual std::string getType() const = 0;
 };
 

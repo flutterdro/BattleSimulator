@@ -22,7 +22,14 @@ public:
 
     static void updateState(unsigned int newTime);
 
-
+    static Unit* getUnitAtPosition(int x, int y) {
+        for (const auto& unit : units) {
+            if (unit->posX == x && unit->posY == y) {
+                return unit.get(); // Return the raw pointer to the unit
+            }
+        }
+        return nullptr; // Return nullptr if no unit is found at the position
+    }
     static void setHeight(int row, int col, int height);
 
     static void WriteState();

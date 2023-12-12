@@ -33,14 +33,12 @@ void BattleSimulator::AddUnit(std::string unitType, std::string id, int x, int y
 
 
 bool BattleSimulator::isPositionOccupied(int x, int y) {
-    {
-        for (const auto& unit : units) {
-            if (unit->posX == x && unit->posY == y) {
-                return true;
-            }
+    for (const auto& unit : units) {
+        if (unit->posX == x && unit->posY == y) {
+            return true;
         }
-        return false;
     }
+    return false;
 }
 
 GameBoard* BattleSimulator::board = nullptr;
@@ -69,7 +67,10 @@ void BattleSimulator::processCommand(const std::string& command) {
             } else if (cmd == "attack") {
                 std::string id, direction;
                 iss >> id >> direction;
-                // Implement attack logic
+                for(auto& unit: units) {
+                    if(unit->id == id)
+                        unit->attack(board, direction);
+                }
             } else if (cmd == "state") {
                 WriteState();
             }

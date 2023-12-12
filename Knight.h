@@ -6,6 +6,7 @@
 #define KNIGHT_H
 #include "Unit.h"
 #include "GameBoard.h"
+#include "BattleSimulator.h"
 
 class Knight : public Unit {
 public:
@@ -13,7 +14,7 @@ public:
 
     void move(int x, int y, GameBoard* board) override;
 
-    void attack(GameBoard* board) override;
+    void attack(GameBoard* board, const std::string& direction) override;
 
     std::string getType() const override {
         return "knight";
