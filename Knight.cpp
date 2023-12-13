@@ -20,6 +20,10 @@ void Knight::move(int x, int y, GameBoard* board) {
                 return;
         }
 
+        if(x == posX && y == posY) {
+                return;
+        }
+
         std::queue<Node> q;
         std::set<std::pair<int, int>> visited;
         q.push({posX, posY, 0});

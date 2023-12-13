@@ -10,6 +10,10 @@ void Footman::move(int x, int y, GameBoard* board) {
         isDeadInside = true;
         return;
     }
+
+    if(x == posX && y == posY) {
+        return;
+    }
     if(BattleSimulator::isPositionOccupied(x,y))
         Failed = true;
 

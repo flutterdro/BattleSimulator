@@ -15,6 +15,11 @@ void Rifleman::move(int x, int y, GameBoard* board) {
     struct Node {
                 int x, y, dist;
         };
+
+        if(x == posX && y == posY) {
+                return;
+        }
+
         if(x > board->M || x <= 0 || y <= 0 || y>board->N) {
                 isDeadInside = true;
                 return;
@@ -75,6 +80,8 @@ void Rifleman::move(int x, int y, GameBoard* board) {
         // If we reach here, move failed
         isDeadInside = true;
 }
+
+
 
 void Rifleman::attack(GameBoard* board, const std::string& direction) {
         int atPosX = 0;
