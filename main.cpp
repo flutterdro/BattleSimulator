@@ -28,7 +28,8 @@ int main() {
         if (lineStream >> currentTime) {
             std::getline(lineStream >> std::ws, commands); // Read the remaining line as commands, skipping whitespace
 
-
+            // Update state for the current time
+            BattleSimulator::updateState(currentTime);
 
             // Split commands by ';'
             std::istringstream commandStream(commands);
@@ -47,8 +48,7 @@ int main() {
             }
         }
 
-        // Update state for the current time
-        BattleSimulator::updateState(currentTime);
+
     }
 
 

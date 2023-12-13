@@ -5,6 +5,8 @@
 
 #include "BattleSimulator.h"
 
+#include <algorithm>
+
 
 void BattleSimulator::AddUnit(std::string unitType, std::string id, int x, int y) {
     // if can't spawn - ignore
@@ -80,7 +82,13 @@ void BattleSimulator::processCommand(const std::string& command) {
 }
 
 void BattleSimulator::WriteState() {
-    for(auto& unit:units) {
+    // Sort the units by their IDs
+    std::sort(units.begin(), units.end(), [](const std::unique_ptr<Unit>& a, const std::unique_ptr<Unit>& b) {
+        return a->id < b->id;
+    });
+
+    // Now print the sorted units
+    for (const auto& unit : units) {
         std::string unitType = unit->getType();
         std::cout << unit->id << " " << unitType << " (" << unit->posX << ", " << unit->posY << ") " << unit->hp << std::endl;
     }

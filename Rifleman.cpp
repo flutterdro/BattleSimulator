@@ -20,15 +20,18 @@ void Rifleman::move(int x, int y, GameBoard* board) {
         std::set<std::pair<int, int>> visited;
         q.push({posX, posY, 0});
         visited.insert({posX, posY});
-
+        if(BattleSimulator::isPositionOccupied(x,y)) {
+                isDeadInside = true;
+                return;
+        }
         while (!q.empty()) {
                 Node current = q.front();
                 q.pop();
 
                 // Check if we have reached the target position
-                if (current.x == posX && current.y == posY) {
-                        posX = posX;
-                        posY = posY;
+                if (current.x == x && current.y == y) {
+                        posX = x;
+                        posY = y;
                         return; // Move successful
                 }
 
@@ -41,7 +44,7 @@ void Rifleman::move(int x, int y, GameBoard* board) {
                         int newY = current.y + dy[i];
 
                         // Check board boundaries
-                        if (newX < 0 || newX >= board->M || newY < 0 || newY >= board->N)
+                        if (newX < 0 || newX > board->M || newY < 0 || newY > board->N)
                                 continue;
 
                         // Check if already visited
@@ -71,6 +74,37 @@ void Rifleman::move(int x, int y, GameBoard* board) {
 }
 
 void Rifleman::attack(GameBoard* board, const std::string& direction) {
+        int atPosX = 0;
+        int atPosY = 0;
+
+        if(direction == "up")
+                atPosY++;
+        else if(direction == "down")
+                atPosY--;
+        else if(direction == "right")
+                atPosX ++;
+        else if(direction == "left")
+                atPosX--;
+        else
+                return;
+
+        int startX = atPosX + posX;
+        int startY = atPosY + posY;
+
+        while (startX > 0 && startX <= board->M && startY > 0 && startY <= board->N) {
+                auto unit = BattleSimulator::getUnitAtPosition(startX, startY);
+                if(unit == nullptr) {
+                        startX += atPosX;
+                        startY += atPosY;
+                        continue;
+                }
+                int damageEnemy = damage + board->getHeight(posX, posY) - board->getHeight(unit->posX, unit->posY);
+                damageEnemy = std::min(damageEnemy, 0);
+
+                unit->hp-=damageEnemy;
+        }
+
+        isDeadInside = true;
 }
 
 std::string Rifleman::getType() const  {

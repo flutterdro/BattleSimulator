@@ -45,7 +45,7 @@ void Footman::attack(GameBoard* board, const std::string& direction) {
     else
         return;
 
-    auto unit = BattleSimulator::getUnitAtPosition(posX, posY + 1);
+    auto unit = BattleSimulator::getUnitAtPosition(atPosX, atPosY);
     if(unit == nullptr) {
         isDeadInside = true;
         return;
