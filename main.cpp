@@ -46,6 +46,9 @@ int main() {
                     BattleSimulator::processCommand(command);
                 }
             }
+
+            // Update state for the current time
+            BattleSimulator::updateState(currentTime);
         }
 
 

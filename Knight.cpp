@@ -77,19 +77,18 @@ void Knight::attack(GameBoard* board, const std::string& direction) {
         int atPosY = posY;
 
         if(direction == "up")
-                atPosY++;
-        else if(direction == "down")
-                atPosY--;
-        else if(direction == "right")
-                atPosX ++;
-        else if(direction == "left")
                 atPosX--;
+        else if(direction == "down")
+                atPosX++;
+        else if(direction == "right")
+                atPosY ++;
+        else if(direction == "left")
+                atPosY--;
         else
                 return;
 
         auto unit = BattleSimulator::getUnitAtPosition(atPosX, atPosY);
         if(unit == nullptr) {
-                isDeadInside = true;
                 return;
         }
 

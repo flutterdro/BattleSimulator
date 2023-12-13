@@ -74,6 +74,7 @@ void BattleSimulator::processCommand(const std::string& command) {
                         unit->attack(board, direction);
                 }
             } else if (cmd == "state") {
+                updateState(currentTime);
                 WriteState();
             }
             // if nothing from this - incorrect command
@@ -103,11 +104,12 @@ void BattleSimulator::updateState(unsigned newTime) {
             int damage = newTime - currentTime;
             unit->hp -= damage;
 
-            if (unit->hp <= 0) {
-                // The unit is dead, remove it from the vector
-                it = units.erase(it); // erase returns the iterator to the next element
-                continue; // Skip the increment of the iterator
-            }
+        }
+
+        if (unit->hp <= 0) {
+            // The unit is dead, remove it from the vector
+            it = units.erase(it); // erase returns the iterator to the next element
+            continue; // Skip the increment of the iterator
         }
         ++it; // Increment the iterator
     }

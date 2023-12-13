@@ -78,13 +78,13 @@ void Rifleman::attack(GameBoard* board, const std::string& direction) {
         int atPosY = 0;
 
         if(direction == "up")
-                atPosY++;
-        else if(direction == "down")
-                atPosY--;
-        else if(direction == "right")
-                atPosX ++;
-        else if(direction == "left")
                 atPosX--;
+        else if(direction == "down")
+                atPosX++;
+        else if(direction == "right")
+                atPosY ++;
+        else if(direction == "left")
+                atPosY--;
         else
                 return;
 
@@ -99,12 +99,12 @@ void Rifleman::attack(GameBoard* board, const std::string& direction) {
                         continue;
                 }
                 int damageEnemy = damage + board->getHeight(posX, posY) - board->getHeight(unit->posX, unit->posY);
-                damageEnemy = std::min(damageEnemy, 0);
+                damageEnemy = std::max(damageEnemy, 0);
 
                 unit->hp-=damageEnemy;
+                break;
         }
 
-        isDeadInside = true;
 }
 
 std::string Rifleman::getType() const  {

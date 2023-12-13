@@ -10,8 +10,8 @@ void GameBoard::setHeight(int row, int col, int height)  {
 }
 
 int GameBoard::getHeight(int x, int y)  {
-    if (x >= 0 && x < M && y >= 0 && y < N) {
-        return heights[x][y];
+    if (x > 0 && x <= M && y > 0 && y <= N) {
+        return heights[x-1][y-1];
     }
     return -1; // Neplatná pozice
 }
