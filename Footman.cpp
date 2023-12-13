@@ -6,7 +6,10 @@
 void Footman::move(int x, int y, GameBoard* board) {
     // Implement Knight-specific movement logic
     bool Failed = false;
-
+    if(x > board->M || x <= 0 || y <= 0 || y>board->N) {
+        isDeadInside = true;
+        return;
+    }
     if(BattleSimulator::isPositionOccupied(x,y))
         Failed = true;
 

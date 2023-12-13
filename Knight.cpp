@@ -15,6 +15,11 @@ void Knight::move(int x, int y, GameBoard* board) {
                 int x, y, dist;
         };
 
+        if(x > board->M || x <= 0 || y <= 0 || y>board->N) {
+                isDeadInside = true;
+                return;
+        }
+
         std::queue<Node> q;
         std::set<std::pair<int, int>> visited;
         q.push({posX, posY, 0});
@@ -43,7 +48,7 @@ void Knight::move(int x, int y, GameBoard* board) {
                         int newY = current.y + dy[i];
 
                         // Check board boundaries
-                        if (newX < 0 || newX > board->M || newY < 0 || newY > board->N)
+                        if (newX <= 0 || newX > board->M || newY <= 0 || newY > board->N)
                                 continue;
 
                         // Check if already visited

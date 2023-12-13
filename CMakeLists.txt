@@ -12,7 +12,6 @@ add_executable(BattleSimulator main.cpp
         Footman.h
         BattleSimulator.cpp
         Footman.cpp
-        Unit.cpp
         Knight.cpp
         Rifleman.cpp
 )

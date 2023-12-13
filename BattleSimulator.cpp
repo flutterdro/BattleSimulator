@@ -6,7 +6,7 @@
 #include "BattleSimulator.h"
 
 #include <algorithm>
-
+#include "set"
 
 void BattleSimulator::AddUnit(std::string unitType, std::string id, int x, int y) {
     // if can't spawn - ignore
@@ -14,7 +14,7 @@ void BattleSimulator::AddUnit(std::string unitType, std::string id, int x, int y
         return;
 
     // outside from board
-    if(x < 0 || x > board->M || y < 0 || y > board->N)
+    if(x <= 0 || x > board->M || y <= 0 || y > board->N)
         return;
 
     // same iв
@@ -83,9 +83,12 @@ void BattleSimulator::processCommand(const std::string& command) {
 }
 
 void BattleSimulator::WriteState() {
-    // Sort the units by their IDs
+    // Sort the units by their positions (lexicographical order)
     std::sort(units.begin(), units.end(), [](const std::unique_ptr<Unit>& a, const std::unique_ptr<Unit>& b) {
-        return a->id < b->id;
+        if (a->posX == b->posX) {
+            return a->posY < b->posY;  // Sort by posY if posX values are equal
+        }
+        return a->posX < b->posX;      // Otherwise, sort by posX
     });
 
     // Now print the sorted units
@@ -95,6 +98,8 @@ void BattleSimulator::WriteState() {
     }
     std::cout << "---" << std::endl;
 }
+
+
 
 void BattleSimulator::updateState(unsigned newTime) {
     auto it = units.begin();
