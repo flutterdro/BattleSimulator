@@ -12,12 +12,18 @@ class GameBoard {
 public:
     int M, N;
     std::vector<std::vector<int>> heights;
-    GameBoard(int m, int n);
+    GameBoard(int m, int n) : M(m), N(n), heights(m, std::vector<int>(n)) {}
 
-    void setHeight(int row, int col, int height);
+    void setHeight(int row, int col, int height)  {
+        heights[row][col] = height;
+    }
 
-    int getHeight(int x, int y);
-
+    int getHeight(int x, int y)  {
+        if (x > 0 && x <= M && y > 0 && y <= N) {
+            return heights[x-1][y-1];
+        }
+        return -1; // Neplatná pozice
+    }
 
 };
 
