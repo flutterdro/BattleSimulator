@@ -7,6 +7,9 @@
 
 #include <algorithm>
 #include "set"
+#include "Knight.h"
+#include "Rifleman.h"
+#include "Footman.h"
 
 void BattleSimulator::AddUnit(std::string unitType, std::string id, int x, int y) {
     // if can't spawn - ignore
@@ -43,9 +46,6 @@ bool BattleSimulator::isPositionOccupied(int x, int y) {
     return false;
 }
 
-GameBoard* BattleSimulator::board = nullptr;
-unsigned int BattleSimulator::currentTime = 0;
-std::vector<std::unique_ptr<Unit>> BattleSimulator::units;
 
 void BattleSimulator::processCommand(const std::string& command) {
     {
@@ -64,15 +64,16 @@ void BattleSimulator::processCommand(const std::string& command) {
                 // Implement move logic
                 for(auto& unit: units) {
                     if(unit->id == id)
-                        unit->move(x, y, board);
+                        unit->move(x, y, board, this);
                 }
             } else if (cmd == "attack") {
                 std::string id, direction;
                 iss >> id >> direction;
                 for(auto& unit: units) {
                     if(unit->id == id)
-                        unit->attack(board, direction);
+                        unit->attack(board, this, direction);
                 }
+                updateState(currentTime);
             } else if (cmd == "state") {
                 updateState(currentTime);
                 WriteState();
@@ -125,7 +126,8 @@ void BattleSimulator::setHeight(int row, int col, int height) {
     board->setHeight(row, col, height);
 }
 
-void BattleSimulator::initialize(int M, int N) {
+BattleSimulator::BattleSimulator(int M, int N) {
     board = new GameBoard(M, N);
     currentTime = 0;
 }
+

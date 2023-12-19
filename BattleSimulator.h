@@ -7,22 +7,23 @@
 #include "GameBoard.h"
 #include "sstream"
 #include "memory"
-#include "Knight.h"
-#include "Rifleman.h"
-#include "Footman.h"
+
+#include "Unit.h"
 
 
 class BattleSimulator {
 public:
-    static GameBoard* board;
-    static unsigned int currentTime;
-    static std::vector<std::unique_ptr<Unit>> units;
+    GameBoard* board;
+    unsigned int currentTime;
+    std::vector<std::unique_ptr<Unit>> units;
 
-    static void initialize(int M, int N);
+    BattleSimulator(int M, int N);
 
-    static void updateState(unsigned int newTime);
+    void initialize(int M, int N);
 
-    static Unit* getUnitAtPosition(int x, int y) {
+    void updateState(unsigned int newTime);
+
+    Unit* getUnitAtPosition(int x, int y) {
         for (auto& unit : units) {
             if (unit->posX == x && unit->posY == y) {
                 return unit.get();  // Returns a raw pointer to the unit
@@ -31,15 +32,15 @@ public:
         return nullptr;
     }
 
-    static void setHeight(int row, int col, int height);
+    void setHeight(int row, int col, int height);
 
-    static void WriteState();
+    void WriteState();
 
-    static void AddUnit(std::string unitType, std::string id, int x, int y);
+    void AddUnit(std::string unitType, std::string id, int x, int y);
 
-    static bool isPositionOccupied(int x, int y);
+    bool isPositionOccupied(int x, int y);
 
-    static void processCommand(const std::string& command);
+    void processCommand(const std::string& command);
 
 
 };

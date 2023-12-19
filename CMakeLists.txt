@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.27)
 project(BattleSimulator)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 
 add_executable(BattleSimulator main.cpp
         GameBoard.h
@@ -14,4 +14,5 @@ add_executable(BattleSimulator main.cpp
         Footman.cpp
         Knight.cpp
         Rifleman.cpp
+        Unit.cpp
 )

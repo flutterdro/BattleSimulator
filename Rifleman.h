@@ -2,19 +2,16 @@
 // Created by Rostyslav on 12.12.2023.
 //
 
-
+#ifndef RIFLEMAN_H
+#define RIFLEMAN_H
 #include <string>
 #include "Unit.h"
 
-#ifndef RIFLEMAN_H
-#define RIFLEMAN_H
 class Rifleman : public Unit {
 public:
     Rifleman(const std::string& id, int posX, int posY);
 
-    void move(int x, int y, GameBoard* board) override ;
-
-    void attack(GameBoard* board, const std::string& direction) override;
+    void attack(GameBoard* board, BattleSimulator* sim, const std::string& direction) override;
 
     [[nodiscard]] std::string getType() const override;
 };
