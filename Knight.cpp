@@ -10,7 +10,7 @@
 Knight::Knight(const std::string& id, int posX, int posY)
         : Unit(id, 50, posX, posY, 5, 1, 5) {}
 
-void Knight::attack(GameBoard* board, BattleSimulator* sim, const std::string& direction) {
+void Knight::attack(const GameBoard& board, BattleSimulator* sim, const std::string& direction) {
         int atPosX = posX;
         int atPosY = posY;
 
@@ -29,9 +29,9 @@ void Knight::attack(GameBoard* board, BattleSimulator* sim, const std::string& d
         if(unit == nullptr) {
                 return;
         }
-        if(abs(board->getHeight(posX, posY) - board->getHeight(unit->posX, unit->posY)) > 1)
+        if(abs(board.getHeight(posX, posY) - board.getHeight(unit->posX, unit->posY)) > 1)
                 return;
-        int damageEnemy = damage + board->getHeight(posX, posY) - board->getHeight(unit->posX, unit->posY);
+        int damageEnemy = damage + board.getHeight(posX, posY) - board.getHeight(unit->posX, unit->posY);
         damageEnemy = std::max(damageEnemy, 0);
 
         unit->hp-=damageEnemy;

@@ -11,7 +11,7 @@ class Rifleman : public Unit {
 public:
     Rifleman(const std::string& id, int posX, int posY);
 
-    void attack(GameBoard* board, BattleSimulator* sim, const std::string& direction) override;
+    void attack(const GameBoard& board, BattleSimulator* sim, const std::string& direction) override;
 
     [[nodiscard]] std::string getType() const override;
 };

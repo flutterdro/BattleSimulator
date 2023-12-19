@@ -17,15 +17,15 @@ public:
     int hp;
     int posX, posY; // Position
     int maxMove, maxStep; // Movement capabilities
-    bool isDeadInside;
     int damage;
+    bool isDeadInside;
     Unit(const std::string& id, int hp, int posX, int posY, int maxMove, int maxStep, int damage)
         : id(id), hp(hp), posX(posX), posY(posY), maxMove(maxMove), maxStep(maxStep), isDeadInside(false), damage(damage) {}
 
     virtual ~Unit() = default;
 
-    void move(int x, int y, GameBoard* board, BattleSimulator* sim); // Pure virtual function for movement
-    virtual void attack(GameBoard* board, BattleSimulator* sim, const std::string& direction) = 0; // Pure virtual function for attack
+    void move(int x, int y, const GameBoard& board, BattleSimulator* sim); // Pure virtual function for movement
+    virtual void attack(const GameBoard& board, BattleSimulator* sim, const std::string& direction) = 0; // Pure virtual function for attack
     [[nodiscard]] virtual std::string getType() const = 0;
 };
 

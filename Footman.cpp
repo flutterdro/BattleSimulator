@@ -4,7 +4,7 @@
 #include "Footman.h"
 #include "BattleSimulator.h"
 
-void Footman::attack(GameBoard* board, BattleSimulator* sim, const std::string& direction) {
+void Footman::attack(const GameBoard& board, BattleSimulator* sim, const std::string& direction) {
     int atPosX = posX;
     int atPosY = posY;
 
@@ -24,10 +24,10 @@ void Footman::attack(GameBoard* board, BattleSimulator* sim, const std::string& 
         return;
     }
 
-    if(board->getHeight(posX, posY) - board->getHeight(unit->posX, unit->posY) != 0)
+    if(board.getHeight(posX, posY) - board.getHeight(unit->posX, unit->posY) != 0)
         return;
 
-    int damageEnemy = damage + board->getHeight(posX, posY) - board->getHeight(unit->posX, unit->posY);
+    int damageEnemy = damage + board.getHeight(posX, posY) - board.getHeight(unit->posX, unit->posY);
     damageEnemy = std::max(damageEnemy, 0);
 
     unit->hp-=damageEnemy;

@@ -5,7 +5,7 @@
 #include "GameBoard.h"
 #include "BattleSimulator.h"
 
-void Unit::move(int x, int y, GameBoard* board, BattleSimulator* sim) {
+void Unit::move(int x, int y, const GameBoard& board, BattleSimulator* sim) {
     struct Node {
                 int x, y, dist;
         };
@@ -14,7 +14,7 @@ void Unit::move(int x, int y, GameBoard* board, BattleSimulator* sim) {
                 return;
         }
 
-        if(x > board->M || x <= 0 || y <= 0 || y>board->N) {
+        if(x > board.M || x <= 0 || y <= 0 || y>board.N) {
                 isDeadInside = true;
                 return;
         }
@@ -38,15 +38,15 @@ void Unit::move(int x, int y, GameBoard* board, BattleSimulator* sim) {
                 }
 
                 // Directions: up, right, down, left
-                const int dx[] = {-1, 0, 1, 0};
-                const int dy[] = {0, 1, 0, -1};
+                constexpr int dx[] = {-1, 0, 1, 0};
+                constexpr int dy[] = {0, 1, 0, -1};
 
                 for (int i = 0; i < 4; ++i) {
                         int newX = current.x + dx[i];
                         int newY = current.y + dy[i];
 
                         // Check board boundaries
-                        if (newX <= 0 || newX > board->M || newY <= 0 || newY > board->N)
+                        if (newX <= 0 || newX > board.M || newY <= 0 || newY > board.N)
                                 continue;
 
                         // Check if already visited
@@ -58,7 +58,7 @@ void Unit::move(int x, int y, GameBoard* board, BattleSimulator* sim) {
                                 continue;
 
                         // Check height difference constraint
-                        if (abs(board->getHeight(newX, newY) - board->getHeight(current.x, current.y)) > maxStep)
+                        if (abs(board.getHeight(newX, newY) - board.getHeight(current.x, current.y)) > maxStep)
                                 continue;
 
                         // Check if within max move range

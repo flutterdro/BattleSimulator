@@ -18,7 +18,7 @@ public:
         heights[row][col] = height;
     }
 
-    int getHeight(int x, int y)  {
+    int getHeight(int x, int y) const{
         if (x > 0 && x <= M && y > 0 && y <= N) {
             return heights[x-1][y-1];
         }

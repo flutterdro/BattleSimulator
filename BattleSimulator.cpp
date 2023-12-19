@@ -6,10 +6,22 @@
 #include "BattleSimulator.h"
 
 #include <algorithm>
+#include <concepts>
+#include <ranges>
+#include <memory>
+#include "Unit.h"
 #include "set"
 #include "Knight.h"
 #include "Rifleman.h"
 #include "Footman.h"
+#include <format>
+#include <print>
+
+template<typename T> 
+    requires std::equality_comparable<T>
+auto equal_to(T const& smth) {
+    return [smth](auto&& x) { return x == smth; };
+}
 
 void BattleSimulator::AddUnit(std::string unitType, std::string id, int x, int y) {
     // if can't spawn - ignore
@@ -17,7 +29,7 @@ void BattleSimulator::AddUnit(std::string unitType, std::string id, int x, int y
         return;
 
     // outside from board
-    if(x <= 0 || x > board->M || y <= 0 || y > board->N)
+    if(x <= 0 || x > board.M || y <= 0 || y > board.N)
         return;
 
     // same iв
@@ -37,13 +49,11 @@ void BattleSimulator::AddUnit(std::string unitType, std::string id, int x, int y
 }
 
 
-bool BattleSimulator::isPositionOccupied(int x, int y) {
-    for (const auto& unit : units) {
-        if (unit->posX == x && unit->posY == y) {
-            return true;
-        }
-    }
-    return false;
+bool BattleSimulator::isPositionOccupied(int x, int y) const {
+    auto to_tuple_from_ptr = [](const std::unique_ptr<Unit>& a) {
+        return std::pair{a->posX, a->posY};
+    };
+    return std::ranges::any_of(units, equal_to(std::pair{x, y}), to_tuple_from_ptr);
 }
 
 
@@ -85,49 +95,36 @@ void BattleSimulator::processCommand(const std::string& command) {
 
 void BattleSimulator::WriteState() {
     // Sort the units by their positions (lexicographical order)
-    std::sort(units.begin(), units.end(), [](const std::unique_ptr<Unit>& a, const std::unique_ptr<Unit>& b) {
-        if (a->posX == b->posX) {
-            return a->posY < b->posY;  // Sort by posY if posX values are equal
-        }
-        return a->posX < b->posX;      // Otherwise, sort by posX
-    });
-
+    auto to_tuple_from_ptr = [](const std::unique_ptr<Unit>& a) {
+        return std::pair{a->posX, a->posY};
+    };
+    std::ranges::sort(units, std::less<std::pair<int, int>>{}, to_tuple_from_ptr);
     // Now print the sorted units
     for (const auto& unit : units) {
         std::string unitType = unit->getType();
-        std::cout << unit->id << " " << unitType << " (" << unit->posX << ", " << unit->posY << ") " << unit->hp << std::endl;
+        std::println("{} {} ({}, {})", unit->id, unitType, unit->posX, unit->posY, unit->hp);
     }
-    std::cout << "---" << std::endl;
+    std::println("---");
 }
 
 
 
 void BattleSimulator::updateState(unsigned newTime) {
-    auto it = units.begin();
-    while (it != units.end()) {
-        auto& unit = *it;
-        if (unit->isDeadInside) {
-            int damage = newTime - currentTime;
-            unit->hp -= damage;
 
-        }
+    auto is_exhausted_hp = [](auto&& a) { return a->hp <= 0; };
+    auto is_dead_inside = [](auto&& a) { return a->isDeadInside; };
+    auto adjust_hp = [damage = newTime - currentTime](auto&& a) { a->hp -= damage; };
 
-        if (unit->hp <= 0) {
-            // The unit is dead, remove it from the vector
-            it = units.erase(it); // erase returns the iterator to the next element
-            continue; // Skip the increment of the iterator
-        }
-        ++it; // Increment the iterator
-    }
+    std::ranges::for_each(units | std::views::filter(is_dead_inside), adjust_hp);
+    auto elements_to_erase = std::ranges::remove_if(units, is_exhausted_hp);
+    units.erase(elements_to_erase.begin(), elements_to_erase.end());
     currentTime = newTime; // Update the current time
 }
 
 void BattleSimulator::setHeight(int row, int col, int height) {
-    board->setHeight(row, col, height);
+    board.setHeight(row, col, height);
 }
 
-BattleSimulator::BattleSimulator(int M, int N) {
-    board = new GameBoard(M, N);
-    currentTime = 0;
-}
+BattleSimulator::BattleSimulator(int M, int N) 
+    : board(M, N), currentTime(0) {}
 

@@ -13,13 +13,12 @@
 
 class BattleSimulator {
 public:
-    GameBoard* board;
+    //there is no need to make it a pointer as well as allocating it on the heap
+    GameBoard board;
     unsigned int currentTime;
     std::vector<std::unique_ptr<Unit>> units;
 
     BattleSimulator(int M, int N);
-
-    void initialize(int M, int N);
 
     void updateState(unsigned int newTime);
 
@@ -38,7 +37,7 @@ public:
 
     void AddUnit(std::string unitType, std::string id, int x, int y);
 
-    bool isPositionOccupied(int x, int y);
+    bool isPositionOccupied(int x, int y) const;
 
     void processCommand(const std::string& command);
 

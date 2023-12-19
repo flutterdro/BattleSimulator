@@ -6,13 +6,14 @@
 int main() {
     int M, N;
     std::cin >> M >> N;
-    BattleSimulator* sim = new BattleSimulator(M, N);
+    //There is no point in creating this class on the heap since it basically consists of 4 pointers and an int
+    BattleSimulator sim(M, N);
 
     for (int i = 0; i < M; ++i) {
         for (int j = 0; j < N; ++j) {
             int height;
             std::cin >> height;
-            sim->setHeight(i, j, height);
+            sim.setHeight(i, j, height);
         }
     }
 
@@ -21,7 +22,7 @@ int main() {
     std::string line;
     while (std::getline(std::cin, line)) {
         std::istringstream lineStream(line);
-        unsigned int currentTime = sim->currentTime;
+        unsigned int currentTime = sim.currentTime;
         std::string commands;
 
         // Read time and rest of the line
@@ -29,7 +30,7 @@ int main() {
             std::getline(lineStream >> std::ws, commands); // Read the remaining line as commands, skipping whitespace
 
             // Update state for the current time
-            sim->updateState(currentTime);
+            sim.updateState(currentTime);
 
             // Split commands by ';'
             std::istringstream commandStream(commands);
@@ -43,12 +44,12 @@ int main() {
                     }
 
                     // Process each command
-                    sim->processCommand(command);
+                    sim.processCommand(command);
                 }
             }
 
             // Update state for the current time
-            sim->updateState(currentTime);
+            sim.updateState(currentTime);
         }
 
 

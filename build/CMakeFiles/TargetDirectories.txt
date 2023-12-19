@@ -1,0 +1,3 @@
+/Users/flutterdro/dev/BattleSimulator/build/CMakeFiles/BattleSimulator.dir
+/Users/flutterdro/dev/BattleSimulator/build/CMakeFiles/edit_cache.dir
+/Users/flutterdro/dev/BattleSimulator/build/CMakeFiles/rebuild_cache.dir

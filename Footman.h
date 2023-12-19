@@ -16,7 +16,7 @@ public:
     Footman(const std::string& id, int posX, int posY)
         : Unit(id, 20, posX, posY, 1, 1, 1) {}
 
-    void attack(GameBoard* board, BattleSimulator* sim, const std::string& direction) override;
+    void attack(const GameBoard& board, BattleSimulator* sim, const std::string& direction) override;
 
     std::string getType() const override;
 };

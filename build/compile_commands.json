@@ -1,0 +1,38 @@
+[
+{
+  "directory": "/Users/flutterdro/dev/BattleSimulator/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -g -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk @CMakeFiles/BattleSimulator.dir/main.cpp.o.modmap -o CMakeFiles/BattleSimulator.dir/main.cpp.o -c /Users/flutterdro/dev/BattleSimulator/main.cpp",
+  "file": "/Users/flutterdro/dev/BattleSimulator/main.cpp",
+  "output": "CMakeFiles/BattleSimulator.dir/main.cpp.o"
+},
+{
+  "directory": "/Users/flutterdro/dev/BattleSimulator/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -g -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk @CMakeFiles/BattleSimulator.dir/BattleSimulator.cpp.o.modmap -o CMakeFiles/BattleSimulator.dir/BattleSimulator.cpp.o -c /Users/flutterdro/dev/BattleSimulator/BattleSimulator.cpp",
+  "file": "/Users/flutterdro/dev/BattleSimulator/BattleSimulator.cpp",
+  "output": "CMakeFiles/BattleSimulator.dir/BattleSimulator.cpp.o"
+},
+{
+  "directory": "/Users/flutterdro/dev/BattleSimulator/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -g -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk @CMakeFiles/BattleSimulator.dir/Footman.cpp.o.modmap -o CMakeFiles/BattleSimulator.dir/Footman.cpp.o -c /Users/flutterdro/dev/BattleSimulator/Footman.cpp",
+  "file": "/Users/flutterdro/dev/BattleSimulator/Footman.cpp",
+  "output": "CMakeFiles/BattleSimulator.dir/Footman.cpp.o"
+},
+{
+  "directory": "/Users/flutterdro/dev/BattleSimulator/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -g -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk @CMakeFiles/BattleSimulator.dir/Knight.cpp.o.modmap -o CMakeFiles/BattleSimulator.dir/Knight.cpp.o -c /Users/flutterdro/dev/BattleSimulator/Knight.cpp",
+  "file": "/Users/flutterdro/dev/BattleSimulator/Knight.cpp",
+  "output": "CMakeFiles/BattleSimulator.dir/Knight.cpp.o"
+},
+{
+  "directory": "/Users/flutterdro/dev/BattleSimulator/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -g -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk @CMakeFiles/BattleSimulator.dir/Rifleman.cpp.o.modmap -o CMakeFiles/BattleSimulator.dir/Rifleman.cpp.o -c /Users/flutterdro/dev/BattleSimulator/Rifleman.cpp",
+  "file": "/Users/flutterdro/dev/BattleSimulator/Rifleman.cpp",
+  "output": "CMakeFiles/BattleSimulator.dir/Rifleman.cpp.o"
+},
+{
+  "directory": "/Users/flutterdro/dev/BattleSimulator/build",
+  "command": "/opt/homebrew/opt/llvm/bin/clang++ -g -std=gnu++23 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.0.sdk @CMakeFiles/BattleSimulator.dir/Unit.cpp.o.modmap -o CMakeFiles/BattleSimulator.dir/Unit.cpp.o -c /Users/flutterdro/dev/BattleSimulator/Unit.cpp",
+  "file": "/Users/flutterdro/dev/BattleSimulator/Unit.cpp",
+  "output": "CMakeFiles/BattleSimulator.dir/Unit.cpp.o"
+}
+]
